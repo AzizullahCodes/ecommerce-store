@@ -1,0 +1,82 @@
+/* home.css */
+
+.home-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 80vh; /* Centers vertically on the screen */
+  width: 100%;
+  padding: 24px;
+  box-sizing: border-box;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+.home-card {
+  background-color: #ffffff;
+  padding: 40px 32px;
+  border-radius: 16px;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 420px;    /* Fixes the narrow, squished text layout */
+  min-width: 280px;    /* Keeps it from breaking on narrow screens */
+  text-align: center;
+  border: 1px solid #f1f5f9;
+  box-sizing: border-box;
+}
+
+.home-heading {
+  font-size: 2.25rem;
+  font-weight: 800;
+  color: #0f172a;
+  margin-top: 0;
+  margin-bottom: 12px;
+  letter-spacing: -0.025em;
+  line-height: 1.2;
+}
+
+.home-subtext {
+  color: #64748b;
+  font-size: 1rem;
+  margin-top: 0;
+  margin-bottom: 32px;
+  line-height: 1.5;
+}
+
+.button-group {
+  display: flex;
+  flex-direction: column;
+  gap: 14px; /* Fixes the buttons stacking directly on top of each other */
+}
+
+/* Base button layouts */
+.btn-logout, 
+.btn-delete {
+  width: 100%;
+  padding: 14px 20px;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 10px;
+  cursor: pointer;
+  border: none;
+  transition: background-color 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  color: #ffffff;
+}
+
+/* Log Out Color Styling */
+.btn-logout {
+  background-color: #3b82f6;
+}
+
+.btn-logout:hover {
+  background-color: #2563eb;
+}
+
+/* Delete Account Color Styling */
+.btn-delete {
+  background-color: #ef4444;
+}
+
+.btn-delete:hover {
+  background-color: #dc2626;
+}

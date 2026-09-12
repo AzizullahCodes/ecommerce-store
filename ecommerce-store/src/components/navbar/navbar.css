@@ -1,0 +1,164 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.navbar {
+  width: 100%;
+  /* position: sticky;
+  top: 0;
+  z-index: 1000; */
+
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(15px);
+
+  border-bottom: 1px solid #ececec;
+}
+
+.nav-container {
+  max-width: 1300px;
+  margin: auto;
+  padding: 15px 30px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Logo */
+
+.logo {
+  text-decoration: none;
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: #111827;
+}
+
+.logo span {
+  color: #7c3aed;
+}
+
+/* Links */
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 35px;
+  list-style: none;
+}
+
+.nav-links li a {
+  text-decoration: none;
+  color: #4b5563;
+  font-weight: 600;
+  transition: 0.3s;
+}
+
+.nav-links li a:hover {
+  color: #7c3aed;
+}
+
+/* Buttons */
+
+.nav-buttons {
+  display: flex;
+  gap: 12px;
+  margin-left: 20px;
+}
+
+.login-btn {
+  text-decoration: none;
+  padding: 10px 20px;
+  border-radius: 10px;
+
+  border: 1px solid #d1d5db;
+  color: #374151;
+  font-weight: 600;
+
+  transition: 0.3s;
+}
+
+.login-btn:hover {
+  background: #f3f4f6;
+}
+
+.signup-btn {
+  text-decoration: none;
+  padding: 10px 22px;
+  border-radius: 10px;
+
+  background: linear-gradient(
+    135deg,
+    #8b5cf6,
+    #7c3aed
+  );
+
+  color: white;
+  font-weight: 600;
+
+  transition: 0.3s;
+}
+
+.signup-btn:hover {
+  transform: translateY(-2px);
+}
+
+/* Hamburger */
+
+.hamburger {
+  display: none;
+  cursor: pointer;
+}
+
+.hamburger span {
+  display: block;
+  width: 28px;
+  height: 3px;
+  margin: 5px;
+  background: #111827;
+  border-radius: 10px;
+  transition: 0.3s;
+}
+
+/* Mobile */
+
+@media (max-width: 900px) {
+
+  .hamburger {
+    display: block;
+  }
+
+  .nav-links {
+    position: absolute;
+    top: 80px;
+    left: -100%;
+
+    width: 100%;
+    background: white;
+
+    flex-direction: column;
+    gap: 25px;
+
+    padding: 30px 0;
+
+    transition: 0.4s;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+  }
+
+  .nav-links.show {
+    left: 0;
+  }
+
+  .nav-buttons {
+    flex-direction: column;
+    margin-left: 0;
+    width: 90%;
+  }
+
+  .login-btn,
+  .signup-btn {
+    width: 100%;
+    text-align: center;
+  }
+}
