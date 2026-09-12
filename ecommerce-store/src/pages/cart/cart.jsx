@@ -256,6 +256,15 @@ const YourCart = () => {
   const [nowActiveUser, setNowActiveUser] = useState(null);
   const [otherDetails, setOtherDetails] = useState('');
 
+const clearStates = ()=>{
+  setCurrentOrders('');
+  setOtherDetails('');
+  setPrice(0);
+
+  localStorage.setItem('YourOrders',JSON.stringify([]))
+
+}
+
   useEffect(() => {
     let getData = localStorage.getItem('YourOrders');
     if (getData) {
@@ -314,6 +323,9 @@ const YourCart = () => {
       console.log('Cart is empty — cannot place order');
       return;
     }
+    let fetchAllOrders = localStorage.getItem('OrderHistory')
+    // console.log('all orders history....',fetchAllOrders)
+    let jsonFetchAllOrders = JSON.parse(fetchAllOrders);
 
     let ordersObj = {
       bucket: orders,
@@ -323,20 +335,22 @@ const YourCart = () => {
       orderDate: new Date().toISOString()
     };
 
-    console.log('orders object is', ordersObj); // ✅ no more [object Object]
+   jsonFetchAllOrders.push(ordersObj)
+   localStorage.setItem('OrderHistory',JSON.stringify(jsonFetchAllOrders))
+   alert('order placed successfully')
 
-    // save this order into order-history ("My Orders")
-    let existingHistory = JSON.parse(localStorage.getItem('OrderHistory')) || [];
-    existingHistory.push(ordersObj);
-    localStorage.setItem('OrderHistory', JSON.stringify(existingHistory));
+   setTimeout(() => {
+    navigate('/orders')
+    clearStates()
+    
+   }, 1000);
+    // // clear the cart
+    // localStorage.setItem('YourOrders', JSON.stringify([]));
+    // setCurrentOrders([]);
+    // setOtherDetails('');
 
-    // clear the cart
-    localStorage.setItem('YourOrders', JSON.stringify([]));
-    setCurrentOrders([]);
-    setOtherDetails('');
-
-    // navigate to success page
-    navigate('/order-success');
+    // // navigate to success page
+    // navigate('/order-success');
   };
 
   return (

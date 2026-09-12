@@ -8,8 +8,13 @@ const Orders = ()=>{
     useEffect(()=>{
         if(localStorage.getItem('OrderHistory') != null){
             let fetchOrders = localStorage.getItem('OrderHistory');
+            let jsonOrders = JSON.parse(fetchOrders)
 
             console.log(fetchOrders)
+            console.log(jsonOrders)
+        }
+        else{
+            localStorage.setItem('OrderHistory',JSON.stringify([]))
         }
 
 },[])
