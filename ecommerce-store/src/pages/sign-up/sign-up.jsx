@@ -11,6 +11,7 @@ const SignUp = () => {
     //formState
     const [formState,setFormState] = useState({
         name : '',
+        role : '',
         email : '',
         password : ''
     });
@@ -19,7 +20,7 @@ const SignUp = () => {
     //formState handler function
     const formStateHandler = ()=>{
       if(
-        formState.name == ''|| formState.email == '' || formState.password == ''
+        formState.name == ''|| formState.role == ''|| formState.email == '' || formState.password == ''
       ){
         Swal.fire("Plz enter your data!")
 
@@ -43,6 +44,7 @@ else{
    //creating an object to storing in localstorage
         let obj = {
             name :formState.name,
+            role : formState.role,
             email : formState.email,
             password : formState.password
         }
@@ -60,6 +62,7 @@ Swal.fire({
       // clearinputs 
       setFormState({
         name : '',
+        role : '',
         email : '',
         password : ''
       })
@@ -99,6 +102,23 @@ const passwordHandler = () => {
             }} />
           </div>
 
+
+<div className="input-group">
+  <label>Role</label>
+  <select
+    value={formState.role}
+    onChange={(e) => {
+      setFormState({
+        ...formState,
+        role: e.target.value,
+      });
+    }}
+  >
+    <option value="">select role</option>
+    <option value="admin">Admin</option>
+    <option value="user">User</option>
+  </select>
+</div>
           <div className="input-group">
             <label>Email</label>
             <input type="email" placeholder="Enter your email"
@@ -110,6 +130,8 @@ const passwordHandler = () => {
                 })
             }} />
           </div>
+
+           
 
           <div className="input-group">
             <label>Password</label>
