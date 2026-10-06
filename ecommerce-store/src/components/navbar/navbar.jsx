@@ -97,6 +97,9 @@ useEffect(()=>{
             <Link to="/orders">Orders</Link>
           </li>
           
+          <li>
+            <Link to='/checkoutPage'>check-out</Link>
+          </li>
            <li>
             <Link to="/contact">Contact</Link>
           </li>
