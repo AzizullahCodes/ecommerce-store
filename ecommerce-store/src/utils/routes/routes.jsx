@@ -12,6 +12,7 @@ import YourCart from "../../pages/cart/cart";
 import AddProducts from "../../pages/add-products/add-products";
 import SettingPage from "../../pages/setting/setting";
 import CheckoutPage from "../../pages/checkoutPage/checkoutPage";
+import AdminOrders from "../../pages/adminOrderPage/adminOrderPage";
 // Route Guards
 import PublicRoutes from "../public-routes/public-routes";
 import ProtectedRoutes from "../protected-routes/protected-routes";
@@ -39,6 +40,7 @@ const AppRoutes = () => {
         <Route path="/add-products" element={<AddProducts/>}/>
         <Route path="/setting" element={<SettingPage/>}/>
         <Route path="/checkoutPage" element={<CheckoutPage/>}/>
+        <Route path="/adminOrderPage" element={<AdminOrders/>}/>
      
       </Route>
 

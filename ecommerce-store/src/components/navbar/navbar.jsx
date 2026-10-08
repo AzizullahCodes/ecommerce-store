@@ -100,6 +100,10 @@ useEffect(()=>{
           <li>
             <Link to='/checkoutPage'>check-out</Link>
           </li>
+
+          <li>
+            <Link to='/adminOrderPage'>admin Order</Link>
+          </li>
            <li>
             <Link to="/contact">Contact</Link>
           </li>
