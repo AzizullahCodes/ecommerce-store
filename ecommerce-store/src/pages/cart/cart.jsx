@@ -27,7 +27,7 @@ const clearStates = ()=>{
   setOtherDetails('');
   setPrice(0);
 
-  localStorage.setItem('YourOrders',JSON.stringify([]))
+  // localStorage.setItem('YourOrders',JSON.stringify([]))
 
 }
 
@@ -89,9 +89,9 @@ const clearStates = ()=>{
       console.log('Cart is empty — cannot place order');
       return;
     }
-    let fetchAllOrders = localStorage.getItem('OrderHistory')
-    // console.log('all orders history....',fetchAllOrders)
-    let jsonFetchAllOrders = JSON.parse(fetchAllOrders);
+    // let fetchAllOrders = localStorage.getItem('OrderHistory')
+    // // console.log('all orders history....',fetchAllOrders)
+    // let jsonFetchAllOrders = JSON.parse(fetchAllOrders);
 
     let ordersObj = {
       orderId : '34',
@@ -99,11 +99,13 @@ const clearStates = ()=>{
       totalPrice: price,
       otherDetails: otherDetails,
       userId: nowActiveUser.email,
-      orderDate: new Date().toISOString()
+      orderDate: new Date().toLocaleDateString(),
+      orderTime : new Date().toLocaleTimeString()
     };
 
-   jsonFetchAllOrders.push(ordersObj)
-   localStorage.setItem('OrderHistory',JSON.stringify(jsonFetchAllOrders))
+    
+  //  jsonFetchAllOrders.push(ordersObj)
+   localStorage.setItem('OrderHistory',JSON.stringify(ordersObj))
    alert('order placed successfully')
 
    navigate('/orders')
