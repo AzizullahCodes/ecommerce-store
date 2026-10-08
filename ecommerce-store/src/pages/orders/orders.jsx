@@ -201,11 +201,12 @@ const Orders = ()=>{
             <h2>item list</h2>
             <div>
                 <ul>{
-                    list?.map((item,index)=>{
+                    list?.map((item)=>{
                         return <li key={item.productId}>
                             <h3>{item.productName} <div><img src={item.productImage} alt="" /></div> {item.productPrice} {item.quantity} {item.productPrice * item.quantity}</h3>
                         </li>
                     })}
+                    <h3>total price : {myOrders.totalPrice}</h3>
                 </ul>
             </div>
         </div>

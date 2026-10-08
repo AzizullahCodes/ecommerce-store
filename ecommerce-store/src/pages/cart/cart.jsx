@@ -100,7 +100,8 @@ const clearStates = ()=>{
       otherDetails: otherDetails,
       userId: nowActiveUser.email,
       orderDate: new Date().toLocaleDateString(),
-      orderTime : new Date().toLocaleTimeString()
+      orderTime : new Date().toLocaleTimeString(),
+      totalPrice : price
     };
 
     
