@@ -1,159 +1,79 @@
 // import React, { useEffect, useState } from "react";
-// import { useNavigate } from "react-router-dom";
+// import "./Orders.css";
 
 // const Orders = () => {
-//   const navigate = useNavigate();
-//   const [myOrders, setMyOrders] = useState([]);
-//   const [tab, setTab] = useState("All");
+//   const [myOrders, setMyOrders] = useState("");
+//   const orderStatus = ["pending", "confirmed", "cancelled", "delivered", "shipped"];
+//   const [list, setList] = useState([]);
 
-//   const tabs = ["All", "Pending", "Delivered", "Cancelled"];
-
-//   // page khulte hi current user ke orders load karo
 //   useEffect(() => {
-//     const allOrders = JSON.parse(localStorage.getItem("OrderHistory")) || [];
-//     const user = JSON.parse(localStorage.getItem("loggedInUser"));
-
-//     const userOrders = allOrders
-//       .filter((order) => order.userId === user?.email)
-//       .reverse(); // latest sabse upar
-
-//     setMyOrders(userOrders);
+//     let fetchAllOrders = localStorage.getItem("OrderHistory") || [];
+//     if (!fetchAllOrders) {
+//       alert("No order found now");
+//     } else {
+//       let jsonOrders = JSON.parse(fetchAllOrders);
+//       console.log(jsonOrders.bucket);
+//       jsonOrders && setList(jsonOrders.bucket);
+//       jsonOrders && setMyOrders(jsonOrders);
+//     }
 //   }, []);
 
-//   // Cancel Order
-//   const cancelOrder = (orderId) => {
-//     const allOrders = JSON.parse(localStorage.getItem("OrderHistory")) || [];
-
-//     const updated = allOrders.map((order) =>
-//       order.orderId === orderId ? { ...order, status: "Cancelled" } : order
-//     );
-//     localStorage.setItem("OrderHistory", JSON.stringify(updated));
-
-//     setMyOrders(
-//       myOrders.map((order) =>
-//         order.orderId === orderId ? { ...order, status: "Cancelled" } : order
-//       )
-//     );
-//   };
-
-//   // Buy Again: purane items wapas cart mein
-//   const buyAgain = (items) => {
-//     const cart = JSON.parse(localStorage.getItem("YourOrders")) || [];
-
-//     items.forEach((item) => {
-//       const found = cart.find((c) => c.productId === item.productId);
-//       if (found) {
-//         found.quantity += item.quantity;
-//       } else {
-//         cart.push({ ...item });
-//       }
-//     });
-
-//     localStorage.setItem("YourOrders", JSON.stringify(cart));
-//     navigate("/cart"); // apne cart ka asli route likho
-//   };
-
-//   // tab ke hisaab se filter
-//   const filteredOrders =
-//     tab === "All"
-//       ? myOrders
-//       : myOrders.filter((order) => (order.status || "Pending") === tab);
-
 //   return (
-//     <div style={{ padding: 20 }}>
-//       <h1>My Orders ({myOrders.length})</h1>
+//     <div className="orders-page">
+//       <h1 className="orders-title">My All Orders</h1>
 
-//       {/* Tabs */}
-//       <div style={{ marginBottom: 20 }}>
-//         {tabs.map((t) => (
-//           <button
-//             key={t}
-//             onClick={() => setTab(t)}
-//             style={{
-//               marginRight: 10,
-//               padding: "6px 14px",
-//               cursor: "pointer",
-//               background: tab === t ? "#0d6efd" : "#eee",
-//               color: tab === t ? "#fff" : "#000",
-//               border: "none",
-//               borderRadius: 5,
-//             }}
-//           >
-//             {t}
-//           </button>
-//         ))}
-//       </div>
+//       <div className="order-card">
+//         {/* Header */}
+//         <div className="order-header">
+//           <div>
+//             <p className="order-label">Order ID</p>
+//             <h2 className="order-id">#{myOrders.orderId}</h2>
+//           </div>
 
-//       {filteredOrders.length === 0 && <p>Koi order nahi mila.</p>}
+//           <div>
+//             <p className="order-label">Order Date</p>
+//             <p className="order-value">{myOrders.orderDate}</p>
+//             <p className="order-value">{myOrders.orderTime}</p>
+//           </div>
 
-//       {filteredOrders.map((order) => {
-//         const status = order.status || "Pending";
+//           <span className={`status-badge status-${orderStatus[0]}`}>
+//             {orderStatus[0]}
+//           </span>
+//         </div>
 
-//         return (
-//           <div
-//             key={order.orderId}
-//             style={{
-//               border: "1px solid #ccc",
-//               borderRadius: 8,
-//               padding: 15,
-//               marginBottom: 20,
-//             }}
-//           >
-//             <h3>Order #{order.orderId}</h3>
-//             <p>Date: {new Date(order.orderDate).toLocaleDateString()}</p>
-//             <p>
-//               Status: <b>{status}</b>
-//             </p>
-
-//             {order.estimatedDelivery && status !== "Cancelled" && (
-//               <p>
-//                 Estimated Delivery:{" "}
-//                 {new Date(order.estimatedDelivery).toLocaleDateString()}
-//               </p>
-//             )}
-
-//             <p>
-//               Payment: {order.paymentMethod || "COD"} (
-//               {order.paymentStatus || "Unpaid"})
-//             </p>
-
-//             {/* Items */}
-//             {order.bucket.map((item) => (
-//               <div
-//                 key={item.productId}
-//                 style={{ display: "flex", gap: 15, marginBottom: 10 }}
-//               >
+//         {/* Items */}
+//         <h3 className="items-title">Item List</h3>
+//         <ul className="items-list">
+//           {list?.map((item) => {
+//             return (
+//               <li key={item.productId} className="item-row">
 //                 <img
+//                   className="item-image"
 //                   src={item.productImage}
 //                   alt={item.productName}
-//                   style={{ width: 60, height: 60, objectFit: "contain" }}
 //                 />
-//                 <div>
-//                   <div>{item.productName}</div>
-//                   <div>
-//                     {item.productPrice} x {item.quantity} ={" "}
-//                     {item.productPrice * item.quantity} PKR
-//                   </div>
+
+//                 <div className="item-info">
+//                   <h3 className="item-name">{item.productName}</h3>
+//                   <p className="item-meta">
+//                     Price: {item.productPrice} PKR &nbsp;|&nbsp; Qty: {item.quantity}
+//                   </p>
 //                 </div>
-//               </div>
-//             ))}
 
-//             {order.otherDetails && <p>Note: {order.otherDetails}</p>}
-//             <h4>Total: {order.totalPrice} PKR</h4>
+//                 <div className="item-subtotal">
+//                   {item.productPrice * item.quantity} PKR
+//                 </div>
+//               </li>
+//             );
+//           })}
+//         </ul>
 
-//             {/* Buttons */}
-//             <button onClick={() => navigate(`/orders/${order.orderId}`)}>
-//               View Details
-//             </button>{" "}
-//             <button onClick={() => buyAgain(order.bucket)}>Buy Again</button>{" "}
-//             {status === "Pending" && (
-//               <button onClick={() => cancelOrder(order.orderId)}>
-//                 Cancel Order
-//               </button>
-//             )}
-//           </div>
-//         );
-//       })}
+//         {/* Footer */}
+//         <div className="order-footer">
+//           <span>Total Price</span>
+//           <span className="order-total">{myOrders.totalPrice} PKR</span>
+//         </div>
+//       </div>
 //     </div>
 //   );
 // };
@@ -161,56 +81,132 @@
 // export default Orders;
 
 
-
 import React, { useEffect, useState } from "react";
+import "./Orders.css";
 
+const Orders = () => {
+  const [myOrders, setMyOrders] = useState([]);
+  const orderStatus = ["pending", "confirmed", "cancelled", "delivered", "shipped"];
 
+  useEffect(() => {
+    let fetchAllOrders = JSON.parse(localStorage.getItem("OrderHistory"));
+    let activeUser = JSON.parse(localStorage.getItem("loggedInUser"));
 
-const Orders = ()=>{
-    const [myOrders,setMyOrders] = useState('')
-    const orderStatus = ['pending','confirmed','cancelled','delivered','shipped']
-    const [list,setList] = useState([])
+    // array ho tabhi aage chalo
+    if (Array.isArray(fetchAllOrders)) {
+      // sirf current user ke orders, latest sabse upar
+      let userOrders = fetchAllOrders
+        .filter((order) => order.userId === activeUser?.email)
+        .reverse();
+      setMyOrders(userOrders);
+    }
+  }, []);
 
+  if (myOrders.length === 0) {
+    return (
+      <div className="orders-page">
+        <h1 className="orders-title">My All Orders</h1>
+        <p className="empty-text">Aapne abhi tak koi order nahi kiya.</p>
+      </div>
+    );
+  }
 
+  return (
+    <div className="orders-page">
+      <h1 className="orders-title">My All Orders ({myOrders.length})</h1>
 
+      {myOrders.map((order) => {
+        // status lowercase mein, taake badge ki CSS class match kare
+        let status = (order.status || orderStatus[0]).toLowerCase();
 
-    useEffect(()=>{
-        let fetchAllOrders = localStorage.getItem("OrderHistory") || []
-        // console.log(fetchAllOrders)
-        if(!fetchAllOrders){
-            alert('No order found now')
-        }
-        else{
-            let jsonOrders = JSON.parse(fetchAllOrders)
-            //  console.log('json orders...',jsonOrders) 
-            console.log(jsonOrders.bucket)
-            jsonOrders && setList(jsonOrders.bucket)
+        return (
+          <div className="order-card" key={order.orderId}>
+            {/* Header */}
+            <div className="order-header">
+              <div>
+                <p className="order-label">Order ID</p>
+                <h2 className="order-id">#{order.orderId}</h2>
+              </div>
 
-              jsonOrders && setMyOrders(jsonOrders)
-        }
-    },[])
+              <div>
+                <p className="order-label">Order Date</p>
+                <p className="order-value">
+                  {new Date(order.orderDate).toLocaleDateString()}
+                </p>
+                <p className="order-value">{order.orderTime}</p>
+              </div>
 
-
-    return(
-        <div>
-            <h1>My All Orders page</h1>
-            <h1>{myOrders.orderId}</h1>
-            <h1>{myOrders.orderDate}</h1>
-            <h1>{myOrders.orderTime}</h1>
-            <h2>Order status : {orderStatus[0]}</h2>
-            <h2>item list</h2>
-            <div>
-                <ul>{
-                    list?.map((item)=>{
-                        return <li key={item.productId}>
-                            <h3>{item.productName} <div><img src={item.productImage} alt="" /></div> {item.productPrice} {item.quantity} {item.productPrice * item.quantity}</h3>
-                        </li>
-                    })}
-                    <h3>total price : {myOrders.totalPrice}</h3>
-                </ul>
+              <span className={`status-badge status-${status}`}>{status}</span>
             </div>
-        </div>
-    )
-}
 
-export default Orders
+            {/* Delivery + payment info */}
+            <div className="order-info">
+              {order.shippingAddress && (
+                <p>
+                  <b>Ship to:</b> {order.shippingAddress.name},{" "}
+                  {order.shippingAddress.address}, {order.shippingAddress.city} |{" "}
+                  {order.shippingAddress.phone}
+                </p>
+              )}
+              <p>
+                <b>Payment:</b> {order.paymentMethod} ({order.paymentStatus})
+              </p>
+              {order.estimatedDelivery && status !== "cancelled" && (
+                <p>
+                  <b>Estimated Delivery:</b>{" "}
+                  {new Date(order.estimatedDelivery).toLocaleDateString()}
+                </p>
+              )}
+              {order.otherDetails && (
+                <p>
+                  <b>Note:</b> {order.otherDetails}
+                </p>
+              )}
+            </div>
+
+            {/* Items */}
+            <h3 className="items-title">Item List</h3>
+            <ul className="items-list">
+              {order.bucket.map((item) => {
+                return (
+                  <li key={item.productId} className="item-row">
+                    <img
+                      className="item-image"
+                      src={item.productImage}
+                      alt={item.productName}
+                    />
+
+                    <div className="item-info">
+                      <h3 className="item-name">{item.productName}</h3>
+                      <p className="item-meta">
+                        Price: {item.productPrice} PKR &nbsp;|&nbsp; Qty: {item.quantity}
+                      </p>
+                    </div>
+
+                    <div className="item-subtotal">
+                      {item.productPrice * item.quantity} PKR
+                    </div>
+                  </li>
+                );
+              })}
+            </ul>
+
+            {/* Footer */}
+            {order.deliveryCharges > 0 && (
+              <div className="delivery-row">
+                <span>Delivery Charges</span>
+                <span>{order.deliveryCharges} PKR</span>
+              </div>
+            )}
+            <div className="order-footer">
+              <span>Total Price</span>
+              <span className="order-total">{order.totalPrice} PKR</span>
+            </div>
+          </div>
+        );
+      })}
+    </div>
+  );
+};
+
+export default Orders;

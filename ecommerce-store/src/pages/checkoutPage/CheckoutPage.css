@@ -1,0 +1,127 @@
+.checkout-page {
+  min-height: 100vh;
+  background: #f5f7fa;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 40px 16px;
+  font-family: "Segoe UI", Arial, sans-serif;
+  color: #222;
+}
+
+.checkout-card {
+  width: 100%;
+  max-width: 620px;
+  background: #fff;
+  border-radius: 16px;
+  padding: 32px;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.08);
+}
+
+.checkout-title {
+  margin: 0;
+  font-size: 30px;
+  font-weight: 700;
+  text-align: center;
+}
+
+.checkout-subtitle {
+  margin: 6px 0 26px;
+  text-align: center;
+  color: #777;
+  font-size: 14px;
+}
+
+/* Section headings */
+.section-title {
+  margin: 24px 0 14px;
+  padding-bottom: 8px;
+  font-size: 17px;
+  color: #0d6efd;
+  border-bottom: 1px solid #eee;
+}
+
+/* Grid */
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group.full-width {
+  grid-column: 1 / -1;
+}
+
+.form-group label {
+  margin-bottom: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #444;
+}
+
+/* Inputs and dropdown */
+.form-group input,
+.form-group select {
+  width: 100%;
+  padding: 12px 14px;
+  font-size: 15px;
+  border: 1px solid #d9dee5;
+  border-radius: 10px;
+  background: #fff;
+  outline: none;
+  box-sizing: border-box;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+  border-color: #0d6efd;
+  box-shadow: 0 0 0 3px rgba(13, 110, 253, 0.15);
+}
+
+.form-group input::placeholder {
+  color: #aab2bd;
+}
+
+.form-group select {
+  cursor: pointer;
+}
+
+/* Button */
+.submit-btn {
+  width: 100%;
+  margin-top: 28px;
+  padding: 14px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #fff;
+  background: #0d6efd;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.1s;
+}
+
+.submit-btn:hover {
+  background: #0b5ed7;
+}
+
+.submit-btn:active {
+  transform: scale(0.98);
+}
+
+/* Mobile */
+@media (max-width: 520px) {
+  .checkout-card {
+    padding: 20px;
+  }
+
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+}
